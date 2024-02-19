@@ -27,6 +27,11 @@ import { Avatar, Stack } from "@mui/material";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Inventory from "./Inventory";
+import Shipping from "./Shipping";
+import Channel from "./Channel";
+import { CiSettings } from "react-icons/ci";
+import { IoIosClose } from "react-icons/io";
 
 const drawerWidth = 240;
 
@@ -80,7 +85,7 @@ const defaultTheme = createTheme();
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
-  const [content, setContent] = React.useState("Orders");
+  const [displaycontent, setdisplayContent] = React.useState("Orders");
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -127,13 +132,13 @@ export default function Dashboard() {
               sx={{ flexGrow: 1 }}
             ></Typography>
             <IconButton color="inherit">
-              <IoMdNotificationsOutline color="#000" />
+              <IoMdNotificationsOutline color="#000" size={20} />
             </IconButton>
             <IconButton color="inherit">
-              <IoMoonOutline color="#000" />
+              <IoMoonOutline color="#000" size={20} />
             </IconButton>
             <IconButton color="inherit">
-              <LiaLanguageSolid color="#000" />
+              <LiaLanguageSolid color="#000" size={20} />
             </IconButton>
             <IconButton color="inherit">
               <Avatar color="#000" />
@@ -159,7 +164,7 @@ export default function Dashboard() {
                   color: "#76b4ff",
                 },
               }}
-              onClick={() => setContent("Dashboard")}
+              onClick={() => setdisplayContent("Dashboard")}
             >
               <ListItemIcon sx={{ minWidth: 0 }}>
                 <AiOutlineDashboard color="#000" />
@@ -176,7 +181,7 @@ export default function Dashboard() {
                   color: "#76b4ff",
                 },
               }}
-              onClick={() => setContent("Inventory")}
+              onClick={() => setdisplayContent("Inventory")}
             >
               <ListItemIcon sx={{ minWidth: 0 }}>
                 <IoPricetagOutline color="#000" />
@@ -193,7 +198,7 @@ export default function Dashboard() {
                   color: "#76b4ff",
                 },
               }}
-              onClick={() => setContent("Orders")}
+              onClick={() => setdisplayContent("Orders")}
             >
               <ListItemIcon sx={{ minWidth: 0 }}>
                 <TiClipboard color="#000" />
@@ -210,7 +215,7 @@ export default function Dashboard() {
                   color: "#76b4ff",
                 },
               }}
-              onClick={() => setContent("Shipping")}
+              onClick={() => setdisplayContent("Shipping")}
             >
               <ListItemIcon sx={{ minWidth: 0 }}>
                 <MdOutlineLocalShipping color="#000" />
@@ -227,7 +232,7 @@ export default function Dashboard() {
                   color: "#76b4ff",
                 },
               }}
-              onClick={() => setContent("Channel")}
+              onClick={() => setdisplayContent("Channel")}
             >
               <ListItemIcon sx={{ minWidth: 0 }}>
                 <IoShareSocialOutline color="#000" />
@@ -250,31 +255,77 @@ export default function Dashboard() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
+            <Grid container spacing={3} sx={{ paddingTop: 0 }}>
               <Grid item xs={12}>
-                <>
-                  <Stack useFlexGap flexDirection={"row"} gap={3}>
-                    <p
-                      style={{
-                        color: "#499dfe",
-                        borderBottom: "1px solid #499dfe",
-                      }}
+                {displaycontent === "Orders" && (
+                  <>
+                    <Box
+                      sx={{ display: "flex", justifyContent: "space-between" }}
                     >
-                      Pending
-                    </p>
-                    <p>Accepted</p>
-                    <p>AWB Created</p>
-                    <p>Ready To Ship</p>
-                    <p>Shipped</p>
-                    <p>Completed</p>
-                    <p>Cancelled</p>
-                  </Stack>
-                  <Paper
-                    sx={{ p: 1, display: "flex", flexDirection: "column" }}
-                  >
-                    <Orders />
-                  </Paper>
-                </>
+                      <button
+                        style={{
+                          padding: 10,
+                          backgroundColor: "#fff",
+                          borderRadius: 4,
+                          border: 0,
+                          boxShadow: "1px black",
+                        }}
+                      >
+                        Orders <IoIosClose />
+                      </button>
+                      <CiSettings />
+                    </Box>
+                    <Stack useFlexGap flexDirection={"row"} gap={3}>
+                      <p
+                        style={{
+                          color: "#499dfe",
+                          borderBottom: "1px solid #499dfe",
+                        }}
+                      >
+                        Pending
+                      </p>
+                      <p>Accepted</p>
+                      <p>AWB Created</p>
+                      <p>Ready To Ship</p>
+                      <p>Shipped</p>
+                      <p>Completed</p>
+                      <p>Cancelled</p>
+                    </Stack>
+                    <Paper
+                      sx={{ p: 1, display: "flex", flexDirection: "column" }}
+                    >
+                      <Orders />
+                    </Paper>
+                  </>
+                )}
+                {displaycontent === "Dashboard" && (
+                  <>
+                    <Stack useFlexGap flexDirection={"row"} gap={3}>
+                      <p
+                        style={{
+                          color: "#499dfe",
+                          borderBottom: "1px solid #499dfe",
+                        }}
+                      >
+                        Pending
+                      </p>
+                      <p>Accepted</p>
+                      <p>AWB Created</p>
+                      <p>Ready To Ship</p>
+                      <p>Shipped</p>
+                      <p>Completed</p>
+                      <p>Cancelled</p>
+                    </Stack>
+                    <Paper
+                      sx={{ p: 1, display: "flex", flexDirection: "column" }}
+                    >
+                      <Orders />
+                    </Paper>
+                  </>
+                )}
+                {displaycontent === "Inventory" && <Inventory />}
+                {displaycontent === "Shipping" && <Shipping />}
+                {displaycontent === "Channel" && <Channel />}
               </Grid>
             </Grid>
           </Container>
